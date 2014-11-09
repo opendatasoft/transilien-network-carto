@@ -106,7 +106,7 @@ Layer:
         ( SELECT
             way, admin_level::integer
           FROM
-            planet_osm_roads WHERE "boundary"='administrative' AND admin_level IN ('4', '6', '8') AND "boundary" IS NOT NULL
+            planet_osm_roads WHERE "boundary"='administrative' AND admin_level IN ('4', '6', '8', '9') AND "boundary" IS NOT NULL
           ORDER BY
             admin_level DESC
         ) AS data
