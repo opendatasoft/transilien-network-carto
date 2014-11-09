@@ -1,7 +1,7 @@
 /* ******* */
 /* Palette */
 /* ******* */
-@water:             #cfe3e8; //#7999C0; //54759D;
+@water:             #bed9e0;
 @land:              #fefefd;
 @water:             #90cccb; //#79c1c0
 @wooded:            #E3E8CF;
