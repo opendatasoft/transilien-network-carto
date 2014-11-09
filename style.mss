@@ -2,7 +2,7 @@
 /* Palette */
 /* ******* */
 @water:             #cfe3e8; //#7999C0; //54759D;
-@land:              #f7f6f1;
+@land:              #fefefd;
 @water:             #90cccb; //#79c1c0
 @wooded:            #E3E8CF;
 // @wooded:            #D0D8C5;
