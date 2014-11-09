@@ -1,0 +1,166 @@
+scale: 1
+metatile: 4
+name: "Transilien Network"
+bounds:
+  - -180
+  - -85.05112877980659
+  - 180
+  - 85.05112877980659
+center:
+  - 2.5722
+  - 48.8028
+  - 10
+format: "png"
+interactivity: false
+minzoom: 9
+maxzoom: 15
+srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+Stylesheet:
+  - "style.mss"
+Layer:
+  - id: "land"
+    name: "land"
+    class: ""
+    geometry: "polygon"
+    extent:
+      - -180
+      - -85.05112877980659
+      - 180
+      - 85.05112877980659
+    srs-name: "900913"
+    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    Datasource:
+      file: "http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip"
+      type: "shape"
+    advanced: {}
+  - id: "landuse"
+    name: "landuse"
+    class: ""
+    geometry: "polygon"
+    extent:
+      - -180
+      - -85.05112877980659
+      - 180
+      - 85.05112877980659
+    srs-name: "900913"
+    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    Datasource:
+      dbname: idf
+      geometry_field: way
+      type: postgis
+      extent: -20037508,-19929239,20037508,19929239
+      table: |- 
+        ( SELECT
+            way, way_area AS area, COALESCE(landuse, leisure, "natural", highway, amenity, tourism) AS type,
+            tags->'landfill:type' as landfill_type
+          FROM
+            planet_osm_polygon
+          WHERE
+            way_area > 1000000
+          ORDER BY
+            way_area DESC
+        ) AS data
+  - id: waterway
+    name: waterway
+    class: ""
+    geometry: polygon
+    extent:
+      - -180
+      - -85.05112877980659
+      - 180
+      - 85.05112877980659
+    srs-name: "900913"
+    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    Datasource:
+      dbname: idf
+      geometry_field: way
+      type: postgis
+      extent: -20037508,-19929239,20037508,19929239
+      table: |-
+        ( SELECT
+            way, "natural" AS type, way_area AS area
+          FROM
+            planet_osm_polygon
+          WHERE
+            ("natural"='water' AND way_area > 10000)
+            OR
+            waterway IN ('basin', 'canal', 'riverbank', 'lock')
+          ) AS data
+  - id: boundaries
+    name: boundaries
+    class: ""
+    geometry: polygon
+    extent:
+      - -180
+      - -85.05112877980659
+      - 180
+      - 85.05112877980659
+    srs-name: "900913"
+    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    Datasource:
+      dbname: idf
+      geometry_field: way
+      type: postgis
+      extent: -20037508,-19929239,20037508,19929239
+      table: |-
+        ( SELECT
+            way, admin_level::integer
+          FROM
+            planet_osm_roads WHERE "boundary"='administrative' AND admin_level IN ('4', '6', '8') AND "boundary" IS NOT NULL
+          ORDER BY
+            admin_level DESC
+        ) AS data
+  - id: railway
+    name: railway
+    class: ""
+    geometry: linestring
+    extent:
+      - -180
+      - -85.05112877980659
+      - 180
+      - 85.05112877980659
+    srs-name: "900913"
+    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    Datasource:
+      dbname: idf
+      geometry_field: way
+      type: postgis
+      extent: -20037508,-19929239,20037508,19929239
+      table: |-
+        ( SELECT
+            way, tunnel, bridge, railway, service,
+            'main' AS type
+          FROM
+            planet_osm_line
+          WHERE
+            operator='SNCF'
+            AND osm_id<0
+          ORDER BY
+            z_order
+        ) AS rail
+  - id: place
+    name: place
+    class: ""
+    geometry: point
+    extent:
+      - -180
+      - -85.05112877980659
+      - 180
+      - 85.05112877980659
+    srs-name: "900913"
+    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    Datasource:
+      dbname: idf
+      geometry_field: way
+      type: postgis
+      extent: -20037508,-19929239,20037508,19929239
+      table: |-
+        ( SELECT
+            way, CASE WHEN place='country' THEN 1 WHEN capital='yes' AND admin_level='2' THEN 10 WHEN place='state' THEN 20 WHEN place='city' THEN 21 WHEN place='town' THEN 30 ELSE 100 END as prio,
+            place AS type, name, z_order, CASE WHEN population ~ E'^\\\\d{1,9}$' THEN population::integer ELSE NULL END AS population
+          FROM
+            planet_osm_point
+          WHERE
+            place in ('city', 'town', 'village') AND place IS NOT NULL
+          ORDER BY prio, population DESC NULLS LAST
+        ) AS data
