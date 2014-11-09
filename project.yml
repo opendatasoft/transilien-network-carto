@@ -134,6 +134,7 @@ Layer:
             planet_osm_line
           WHERE
             operator='SNCF'
+            AND tags->'network'='Transilien'
             AND osm_id<0
           ORDER BY
             z_order
