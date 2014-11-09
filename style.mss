@@ -20,6 +20,7 @@
 
 @sans:              'PT Sans Regular';
 @sans_bold:         'PT Sans Bold';
+@sans_bold_italic:  'PT Sans Bold Italic';
 
 
 /* *********** */
@@ -84,7 +85,7 @@ Map {
 }
 #railway[type='main'][zoom>=12] {
   outline/line-color: @rail_case;
-  outline/line-width: 2.6;
+  outline/line-width: 2.4;
   outline/line-cap: square;
   line-color: @rail_fill;
   line-width: 2;
@@ -103,29 +104,13 @@ Map {
 #place[type='city'] {
   text-name:'[name]';
   text-size: 14;
-  text-face-name: @sans;
+  text-face-name: @sans_bold_italic;
+  text-transform: uppercase;
   text-halo-radius: 2;
   text-fill: @city_text;
   text-halo-fill: @city_halo;
 }
-#place[type='town'][zoom<12] {
-  shield-file: url('icons/town.png');
-  shield-name:'[name]';
-  shield-size: 11;
-  shield-face-name: @sans;
-  shield-halo-radius: 2;
-  shield-wrap-width: 50;
-  shield-fill: @town_text;
-  shield-halo-fill: @town_halo;
-  shield-placement-type: simple;
-  shield-placements: 'NE,SW,NW,SE,E,W';
-  shield-text-dy: 3;
-  shield-text-dx: 3;
-  shield-unlock-image: true;
-  shield-min-distance: 10;
-  shield-avoid-edges: true;
-}
-#place[type='town'][zoom>=12],
+#place[type='town'],
 #place[type='village'][zoom>=12] {
   text-name:'[name]';
   text-face-name: @sans;
@@ -137,15 +122,25 @@ Map {
   text-wrap-width: 30;
   text-avoid-edges: true;
   text-label-position-tolerance: 10;
+  text-character-spacing: 0.5;
   [type='town'] {
-    text-size: 11;
     text-fill: @town_text;
     text-halo-fill: @town_halo;
+    text-face-name: @sans_bold;
+    [zoom=11] {
+      text-size: 11;
+    }
+    [zoom=12] {
+      text-size: 12;
+    }
+  }
+  [zoom<12] {
+    text-min-distance: 10;
   }
   [zoom>=13] {
     text-size: 11;
     [type='town'] {
-      text-size: 12;
+      text-size: 13;
     }
   }
 }
