@@ -3,11 +3,8 @@
 /* ******* */
 @water:             #bed9e0;
 @land:              #fefefd;
-@water:             #90cccb; //#79c1c0
-@wooded:            #E3E8CF;
-// @wooded:            #D0D8C5;
-@grass:             #E3E8CF;
-@agriculture:       #E6E8D3;
+@water:             #90cccb;
+@grass:             #d3e0be;
 @residential:       #E2DBDE;
 @admin:             #a8817a;
 
@@ -39,8 +36,8 @@ Map {
 }
 #landuse[type='park']          { polygon-fill: @grass; }
 #landuse[type='garden']        { polygon-fill: @grass; }
-#landuse[type='forest']        { polygon-fill: @wooded;}
-#landuse[type='wood']          { polygon-fill: @wooded; }
+#landuse[type='forest']        { polygon-fill: @grass;}
+#landuse[type='wood']          { polygon-fill: @grass; }
 
 #waterway {
   polygon-fill: @water;
