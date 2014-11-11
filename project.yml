@@ -86,37 +86,6 @@ Layer:
             OR
             waterway IN ('basin', 'canal', 'riverbank', 'lock')
           ) AS data
-  - id: boundary_low
-    name: boundary_low
-    class: ""
-    geometry: polygon
-    extent:
-      - -180
-      - -85.05112877980659
-      - 180
-      - 85.05112877980659
-    srs-name: "900913"
-    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
-    Datasource:
-      dbname: idf
-      geometry_field: way
-      type: postgis
-      extent: -20037508,-19929239,20037508,19929239
-      table: |-
-        ( SELECT
-            ST_Simplify(ST_LineMerge(ST_Union(way)), 500) AS way, admin_level::integer
-          FROM
-            planet_osm_roads
-          WHERE
-            "boundary"='administrative'
-            AND ((admin_level='6' AND tags->'ref:INSEE' IN ('75','77','78','91','92','93','94','95')) OR (admin_level='4' AND tags->'ref:INSEE'='11'))
-            AND "boundary" IS NOT NULL
-            AND osm_id<0
-            AND way && !bbox!
-          GROUP BY admin_level
-          ORDER BY
-            admin_level DESC
-        ) AS data
   - id: boundary
     name: boundary
     class: ""

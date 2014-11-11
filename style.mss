@@ -46,14 +46,19 @@ Map {
 /* ************************* */
 /* ADMINISTRATIVE BOUNDARIES */
 /* ************************* */
-#boundary_low[zoom<12],
-#boundary[zoom>=12] {
+#boundary[admin_level=4],
+#boundary[admin_level=6],
+#boundary[admin_level=8][zoom>=12],
+#boundary[admin_level=9][zoom>=12] {
   eraser/line-color: white;
   eraser/line-width: 0.5;
   eraser/comp-op: darken;
   line-color: @admin;
   line-width: 0.5;
   line-smooth: 0.2;
+  [zoom<12] {
+    line-simplify: 10;
+  }
   [admin_level=8],
   [admin_level=9] {
     line-dasharray: 1,3;
