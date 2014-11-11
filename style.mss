@@ -46,19 +46,14 @@ Map {
 /* ************************* */
 /* ADMINISTRATIVE BOUNDARIES */
 /* ************************* */
-#boundaries[admin_level=4],
-#boundaries[admin_level=6],
-#boundaries[admin_level=8][zoom>=12],
-#boundaries[admin_level=9][zoom>=12] {
-  [admin_level=4] {
-    outline/line-color: lighten(@admin, 25%);
-    outline/line-width: 2;
-  }
+#boundary_low[zoom<12],
+#boundary[zoom>=12] {
   eraser/line-color: white;
   eraser/line-width: 0.5;
   eraser/comp-op: darken;
   line-color: @admin;
   line-width: 0.5;
+  line-smooth: 0.2;
   [admin_level=8],
   [admin_level=9] {
     line-dasharray: 1,3;
@@ -66,10 +61,11 @@ Map {
     line-color: darken(@admin, 10%);
   }
   [admin_level=4] {
+    line-color: darken(@admin, 10%);
     line-cap: butt;
     line-color: @admin;
     line-width: 1;
-    line-dasharray: 10,5,2,5;
+    line-dasharray: 10,4,2,4;
     [zoom>=12] {
       line-width: 2;
     }
