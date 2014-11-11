@@ -13,7 +13,7 @@
 
 @city_text:         #222;
 @city_halo:         @land;
-@town_text:         #333;
+@town_text:         #444;
 @town_halo:         @land;
 @village_text:      #444;
 @village_halo:      @land;
