@@ -2,10 +2,10 @@ scale: 1
 metatile: 1
 name: "Transilien Network"
 bounds:
-  - 1.395263671875
-  - 48.111099041065366
-  - 3.592529296875
-  - 49.24629332459796
+  - 1.39526
+  - 47.9873
+  - 3.59253
+  - 49.2633
 center:
   - 2.5722
   - 48.8028
@@ -138,7 +138,7 @@ Layer:
           FROM
             planet_osm_line
           WHERE
-            tags->'network' IN('Transilien', 'RER')
+            tags->'network' IN ('Transilien', 'RER')
             AND osm_id<0
             AND (railway IS NOT NULL OR route IS NOT NULL)
           ORDER BY
