@@ -134,13 +134,13 @@ Layer:
       extent: -20037508,-19929239,20037508,19929239
       table: |-
         ( SELECT
-            way, tunnel, bridge, railway, service,
-            'main' AS type
+            way
           FROM
             planet_osm_line
           WHERE
             tags->'network' IN('Transilien', 'RER')
             AND osm_id<0
+            AND (railway IS NOT NULL OR route IS NOT NULL)
           ORDER BY
             z_order
         ) AS rail

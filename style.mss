@@ -80,11 +80,11 @@ Map {
 /* ******** */
 /* RAILWAYS */
 /* ******** */
-#railway[type='main'][zoom<12] {
+#railway[zoom<12] {
   line-color: @rail_case;
   line-width: 1;
 }
-#railway[type='main'][zoom>=12] {
+#railway[zoom>=12] {
   outline/line-color: @rail_case;
   outline/line-width: 2.4;
   outline/line-cap: square;
