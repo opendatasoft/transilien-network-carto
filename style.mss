@@ -131,6 +131,7 @@ Map {
     text-fill: @town_text;
     text-halo-fill: @town_halo;
     text-face-name: @sans_bold;
+    text-min-padding: 1;
     [zoom=11] {
       text-size: 11;
     }
