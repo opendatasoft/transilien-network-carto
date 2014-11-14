@@ -102,7 +102,7 @@ Map {
 /* ****** */
 /* LABELS */
 /* ****** */
-#place[type='city'] {
+#place[type='city'][name='Paris'] {
   text-name:'[name]';
   text-size: 14;
   text-face-name: @sans_bold_italic;

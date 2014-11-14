@@ -162,11 +162,13 @@ Layer:
       extent: -20037508,-19929239,20037508,19929239
       table: |-
         ( SELECT
-            way, CASE WHEN place='country' THEN 1 WHEN capital='yes' AND admin_level='2' THEN 10 WHEN place='state' THEN 20 WHEN place='city' THEN 21 WHEN place='town' THEN 30 ELSE 100 END as prio,
+            way,
+            CASE WHEN place='city' THEN 1 WHEN place='town' THEN 2 ELSE 100 END as prio,
             place AS type, name, z_order, CASE WHEN population ~ E'^\\\\d{1,9}$' THEN population::integer ELSE NULL END AS population
           FROM
             planet_osm_point
           WHERE
-            place in ('city', 'town', 'village') AND place IS NOT NULL
+            place IN ('city', 'town', 'village')
+            AND place IS NOT NULL
           ORDER BY prio, population DESC NULLS LAST
         ) AS data
