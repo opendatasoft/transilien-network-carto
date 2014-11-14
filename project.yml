@@ -51,12 +51,13 @@ Layer:
       extent: -20037508,-19929239,20037508,19929239
       table: |- 
         ( SELECT
-            way, way_area AS area, COALESCE(landuse, leisure, "natural", highway, amenity, tourism) AS type,
+            way, way_area AS area, COALESCE(landuse, leisure, "natural") AS type,
             tags->'landfill:type' as landfill_type
           FROM
             planet_osm_polygon
           WHERE
             way_area > 1000000
+            AND (landuse IS NOT NULL OR leisure IS NOT NULL or "natural" IS NOT NULL)
           ORDER BY
             way_area DESC
         ) AS data
