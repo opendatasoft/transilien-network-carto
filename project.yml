@@ -2,10 +2,10 @@ scale: 1
 metatile: 4
 name: "Transilien Network"
 bounds:
-  - -180
-  - -85.05112877980659
-  - 180
-  - 85.05112877980659
+  - 1.395263671875
+  - 48.111099041065366
+  - 3.592529296875
+  - 49.24629332459796
 center:
   - 2.5722
   - 48.8028
@@ -138,8 +138,7 @@ Layer:
           FROM
             planet_osm_line
           WHERE
-            operator='SNCF'
-            AND (tags->'network'='Transilien' or tags->'network'='RER')
+            tags->'network' IN('Transilien', 'RER')
             AND osm_id<0
           ORDER BY
             z_order
