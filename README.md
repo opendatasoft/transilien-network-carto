@@ -9,6 +9,7 @@ Carto style for rendering Transilien network.
 Dependencies: postgres, postgis, osm2pgsql, mapnik 3.x, carto
 
 Steps:
+
 1. install dependencies
 2. create a postgis aware database
 3. download OSM data
@@ -20,44 +21,44 @@ Steps:
 
 1. Install dependencies
 
-```
-sudo apt install postgresql-client-9.4 postgresql-9.4-postgis-2.1 osm2pgsql
-```
+    ```
+    sudo apt install postgresql-client-9.4 postgresql-9.4-postgis-2.1 osm2pgsql
+    ```
 
-We need Mapnik 3.x version (because we use `text-repeat-wrap-character`). For
-this, follow the instructions in the [mapnik wiki](https://github.com/mapnik/mapnik/wiki/UbuntuInstallation#install-from-packages).
+    We need Mapnik 3.x version (because we use `text-repeat-wrap-character`). For
+    this, follow the instructions in the [mapnik wiki](https://github.com/mapnik/mapnik/wiki/UbuntuInstallation#install-from-packages).
 
-We need an up to date NodeJS: for this, follow the instructions in the
-[NodeJS wiki](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions).
+    We need an up to date NodeJS: for this, follow the instructions in the
+    [NodeJS wiki](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions).
 
-To read the project, we'll use [Kosmtik](https://github.com/kosmtik/kosmtik)
-as carto wrapper. Install instructions are available on the [Github README](https://github.com/kosmtik/kosmtik#install).
+    To read the project, we'll use [Kosmtik](https://github.com/kosmtik/kosmtik)
+    as carto wrapper. Install instructions are available on the [Github README](https://github.com/kosmtik/kosmtik#install).
 
-We will also need some Kosmtik plugins, so once in the kosmtik root, run:
+    We will also need some Kosmtik plugins, so once in the kosmtik root, run:
 
-```
-node index.js plugins --install kosmtik-tiles-export
-node index.js plugins --install kosmtik-mbtiles-export
-node index.js plugins --install kosmtik-fetch-remote
-```
+    ```
+    node index.js plugins --install kosmtik-tiles-export
+    node index.js plugins --install kosmtik-mbtiles-export
+    node index.js plugins --install kosmtik-fetch-remote
+    ```
 
-We need to override some of the project configs to match our working
-environment, for example for the database credentials. For this, create a 
-`localconfig.js` file in the root of the map project, with this content (adapt
-it to your needs):
+    We need to override some of the project configs to match our working
+    environment, for example for the database credentials. For this, create a 
+    `localconfig.js` file in the root of the map project, with this content (adapt
+    it to your needs):
 
-```javascript
-exports.LocalConfig = function (localizer, project) {
-    localizer.where('Layer').if({'Datasource.type': 'postgis'}).then({
-        'Datasource.dbname': 'idf',
-        'Datasource.password': '',
-        'Datasource.user': 'ybon',
-        'Datasource.host': ''
-    });
-};
-```
-See [Kosmtik local configuration](https://github.com/kosmtik/kosmtik#local-config)
-for more details if needed.
+    ```javascript
+    exports.LocalConfig = function (localizer, project) {
+        localizer.where('Layer').if({'Datasource.type': 'postgis'}).then({
+            'Datasource.dbname': 'idf',
+            'Datasource.password': '',
+            'Datasource.user': 'ybon',
+            'Datasource.host': ''
+        });
+    };
+    ```
+    See [Kosmtik local configuration](https://github.com/kosmtik/kosmtik#local-config)
+    for more details if needed.
 
 
 2. Create a PostGIS aware DB
