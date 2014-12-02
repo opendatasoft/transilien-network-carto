@@ -63,70 +63,70 @@ Steps:
 
 2. Create a PostGIS aware DB
 
-If you don't have a user yet, create one:
-```
-sudo -u postgres createuser {youruser}
-```
+    If you don't have a user yet, create one:
+    ```
+    sudo -u postgres createuser {youruser}
+    ```
 
-Then create the db:
-```
-sudo -u postgres createdb transilien -O {youruser}
-```
+    Then create the db:
+    ```
+    sudo -u postgres createdb transilien -O {youruser}
+    ```
 
-Activate postgis and hstore extensions:
-```
-sudo -u postgres psql transilien
-transilien=# CREATE EXTENSION postgis;
-transilien=# CREATE EXTENSION hstore;
-```
+    Activate postgis and hstore extensions:
+    ```
+    sudo -u postgres psql transilien
+    transilien=# CREATE EXTENSION postgis;
+    transilien=# CREATE EXTENSION hstore;
+    ```
 
 3. Download OSM data
 
-We need `.osm.pbf` files from Geofabrik:
+    We need `.osm.pbf` files from Geofabrik:
 
-- [Ile-de-France](http://download.geofabrik.de/europe/france/ile-de-france-latest.osm.pbf)
-- [Picardie](http://download.geofabrik.de/europe/france/picardie.osm.pbf)
-- [Centre](http://download.geofabrik.de/europe/france/centre.osm.pbf)
-- [Haute-Normandie](http://download.geofabrik.de/europe/france/haute-normandie.osm.pbf)
-- [Champagne-Ardenne](http://download.geofabrik.de/europe/france/champagne-ardenne.osm.pbf)
-- [Bourgogne](http://download.geofabrik.de/europe/france/bourgogne.osm.pbf)
+    - [Ile-de-France](http://download.geofabrik.de/europe/france/ile-de-france-latest.osm.pbf)
+    - [Picardie](http://download.geofabrik.de/europe/france/picardie.osm.pbf)
+    - [Centre](http://download.geofabrik.de/europe/france/centre.osm.pbf)
+    - [Haute-Normandie](http://download.geofabrik.de/europe/france/haute-normandie.osm.pbf)
+    - [Champagne-Ardenne](http://download.geofabrik.de/europe/france/champagne-ardenne.osm.pbf)
+    - [Bourgogne](http://download.geofabrik.de/europe/france/bourgogne.osm.pbf)
 
-We could also download and import the whole France file, but it would be longer.
+    We could also download and import the whole France file, but it would be longer.
 
 
 4. Import data
 
-First, import Île-de-France, in *create* mode:
-```
-osm2pgsql -G -U {youruser} -d transilien path/to/ile-de-france-latest.osm.pbf --hstore --create
-```
+    First, import Île-de-France, in *create* mode:
+    ```
+    osm2pgsql -G -U {youruser} -d transilien path/to/ile-de-france-latest.osm.pbf --hstore --create
+    ```
 
-Then, import all other files in *append* mode, for example:
-```
-osm2pgsql -G -U {youruser} -d transilien path/to/picardie-latest.osm.pbf --hstore --append
-```
+    Then, import all other files in *append* mode, for example:
+    ```
+    osm2pgsql -G -U {youruser} -d transilien path/to/picardie-latest.osm.pbf --hstore --append
+    ```
 
 5. Render map locally
 
-From the root of your kosmtik instance, run:
+    From the root of your kosmtik instance, run:
 
-```
-node index.js serve path/to/transilien/project.yml
-```
+    ```
+    node index.js serve path/to/transilien/project.yml
+    ```
 
-Then browse to http://localhost:6789
+    Then browse to http://localhost:6789
 
 
 6. Export map
 
-Export a tiles tree:
+    Export a tiles tree:
 
-```
-node index.js export path/to/transilien/project.yml --format tiles --output path/to/output/ --minZoom 10 --maxZoom 14
-```
+    ```
+    node index.js export path/to/transilien/project.yml --format tiles --output path/to/output/ --minZoom 10 --maxZoom 14
+    ```
 
-Export a MBTiles file:
+    Export a MBTiles file:
 
-```
-node index.js export path/to/transilien/project.yml --format mbtiles --output path/to/output.mbtiles --minZoom 10 --maxZoom 14
-```
+    ```
+    node index.js export path/to/transilien/project.yml --format mbtiles --output path/to/output.mbtiles --minZoom 10 --maxZoom 14
+    ```
