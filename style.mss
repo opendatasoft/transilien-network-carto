@@ -142,10 +142,12 @@ Map {
   [zoom<12] {
     text-min-distance: 10;
   }
-  [zoom>=13] {
-    text-size: 11;
-    [type='town'] {
-      text-size: 13;
-    }
+  [zoom=13] {
+    text-size: 12;
+    [type='town'] {text-size: 14;}
+  }
+  [zoom>=14] {
+    text-size: 13;
+    [type='town'] {text-size: 15;}
   }
 }
