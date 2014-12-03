@@ -17,12 +17,12 @@ Steps:
 5. render map
 
 
-### Ubuntu 14.04 step by step
+### Ubuntu 14.04 LTS step by step
 
 #### 1. Install dependencies
 
 ```
-sudo apt install postgresql-client-9.4 postgresql-9.4-postgis-2.1 osm2pgsql
+sudo apt install postgresql-client-9.3 postgresql-9.3-postgis-2.1 osm2pgsql
 ```
 
 We need Mapnik 3.x version (because we use `text-repeat-wrap-character`). For
