@@ -85,11 +85,11 @@ transilien=# CREATE EXTENSION hstore;
 We need `.osm.pbf` files from Geofabrik:
 
 - [Ile-de-France](http://download.geofabrik.de/europe/france/ile-de-france-latest.osm.pbf)
-- [Picardie](http://download.geofabrik.de/europe/france/picardie.osm.pbf)
-- [Centre](http://download.geofabrik.de/europe/france/centre.osm.pbf)
-- [Haute-Normandie](http://download.geofabrik.de/europe/france/haute-normandie.osm.pbf)
-- [Champagne-Ardenne](http://download.geofabrik.de/europe/france/champagne-ardenne.osm.pbf)
-- [Bourgogne](http://download.geofabrik.de/europe/france/bourgogne.osm.pbf)
+- [Picardie](http://download.geofabrik.de/europe/france/picardie-latest.osm.pbf)
+- [Centre](http://download.geofabrik.de/europe/france/centre-latest.osm.pbf)
+- [Haute-Normandie](http://download.geofabrik.de/europe/france/haute-normandie-latest.osm.pbf)
+- [Champagne-Ardenne](http://download.geofabrik.de/europe/france/champagne-ardenne-latest.osm.pbf)
+- [Bourgogne](http://download.geofabrik.de/europe/france/bourgogne-latest.osm.pbf)
 
 We could also download and import the whole France file, but it would be longer.
 
