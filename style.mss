@@ -114,11 +114,11 @@ Map {
 #place[type='town'],
 #place[type='village'][zoom>=12] {
   text-name:'[name].replace("Saint-", "St-").replace("Sainte-", "Ste-")';
-  text-face-name: @sans;
+  text-face-name: @sans_bold;
   text-placement:point;
-  text-fill: @village_text;
+  text-fill: @town_text;
   text-size: 10;
-  text-halo-fill: @village_halo;
+  text-halo-fill: @town_halo;
   text-halo-radius: 2;
   text-wrap-width: 30;
   text-label-position-tolerance: 10;
@@ -127,27 +127,10 @@ Map {
   text-wrap-character: '-';
   text-repeat-wrap-character: true;  // mapnik 3.x only
   text-line-spacing: -2;
-  [type='town'] {
-    text-fill: @town_text;
-    text-halo-fill: @town_halo;
-    text-face-name: @sans_bold;
-    text-min-padding: 1;
-    [zoom=11] {
-      text-size: 11;
-    }
-    [zoom=12] {
-      text-size: 12;
-    }
-  }
-  [zoom<12] {
-    text-min-distance: 10;
-  }
-  [zoom=13] {
-    text-size: 12;
-    [type='town'] {text-size: 14;}
-  }
-  [zoom>=14] {
-    text-size: 13;
-    [type='town'] {text-size: 15;}
-  }
+  text-min-padding: 1;
+  [zoom<12] {text-min-distance: 10;}
+  [zoom=11] {text-size: 11;}
+  [zoom=12] {text-size: 12;}
+  [zoom=13] {text-size: 14;}
+  [zoom>=14] {text-size: 15;}
 }
