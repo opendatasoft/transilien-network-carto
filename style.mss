@@ -127,7 +127,10 @@ Map {
   text-wrap-character: '-';
   text-repeat-wrap-character: true;  // mapnik 3.x only
   text-line-spacing: -2;
-  [zoom<12] {text-min-distance: 10;}
+  [zoom<12] {
+    text-min-distance: 10;
+    text-min-padding: 1;
+  }
   [zoom=11] {text-size: 11;}
   [zoom=12] {text-size: 12;}
   [zoom=13] {text-size: 14;}
