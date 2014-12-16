@@ -112,7 +112,7 @@ Map {
   text-halo-fill: @city_halo;
 }
 #place[type='town'],
-#place[type='village'][zoom>=12] {
+#place[type='village'][zoom>=11] {
   text-name:'[name].replace("Saint-", "St-").replace("Sainte-", "Ste-")';
   text-face-name: @sans_bold;
   text-placement:point;
