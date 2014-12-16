@@ -29,7 +29,7 @@
 
 Map {
   background-color: @water;
-  buffer-size: 256;
+  buffer-size: 512;
 }
 #land {
   polygon-fill: @land;
@@ -120,17 +120,19 @@ Map {
   text-size: 10;
   text-halo-fill: @town_halo;
   text-halo-radius: 2;
-  text-wrap-width: 30;
   text-label-position-tolerance: 10;
   text-character-spacing: 0.1;
   text-wrap-width: 30;
   text-wrap-character: '-';
   text-repeat-wrap-character: true;  // mapnik 3.x only
   text-line-spacing: -2;
-  [zoom<12] {
-    text-min-distance: 10;
-    text-min-padding: 1;
-  }
+  text-placement-type: simple;
+  text-placements: "N,S,E,W,NE,SE,NW,SW";
+  text-dy: 3;
+  text-dx: 3;
+  text-avoid-edges: true;
+  text-min-padding: 3;
+  text-min-distance: 10;
   [zoom=11] {text-size: 11;}
   [zoom=12] {text-size: 12;}
   [zoom=13] {text-size: 14;}
