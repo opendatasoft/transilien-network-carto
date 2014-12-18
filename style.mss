@@ -133,6 +133,7 @@ Map {
   text-avoid-edges: true;
   text-min-padding: 3;
   text-min-distance: 10;
+  text-align: center;
   [zoom=11] {text-size: 11;}
   [zoom=12] {text-size: 12;}
   [zoom=13] {text-size: 14;}
