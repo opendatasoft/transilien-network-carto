@@ -29,7 +29,7 @@
 
 Map {
   background-color: @water;
-  buffer-size: 256;
+  buffer-size: 512;
 }
 #land {
   polygon-fill: @land;
@@ -112,40 +112,30 @@ Map {
   text-halo-fill: @city_halo;
 }
 #place[type='town'],
-#place[type='village'][zoom>=12] {
+#place[type='village'][zoom>=11] {
   text-name:'[name].replace("Saint-", "St-").replace("Sainte-", "Ste-")';
-  text-face-name: @sans;
+  text-face-name: @sans_bold;
   text-placement:point;
-  text-fill: @village_text;
+  text-fill: @town_text;
   text-size: 10;
-  text-halo-fill: @village_halo;
+  text-halo-fill: @town_halo;
   text-halo-radius: 2;
-  text-wrap-width: 30;
   text-label-position-tolerance: 10;
   text-character-spacing: 0.1;
   text-wrap-width: 30;
   text-wrap-character: '-';
   text-repeat-wrap-character: true;  // mapnik 3.x only
   text-line-spacing: -2;
-  [type='town'] {
-    text-fill: @town_text;
-    text-halo-fill: @town_halo;
-    text-face-name: @sans_bold;
-    text-min-padding: 1;
-    [zoom=11] {
-      text-size: 11;
-    }
-    [zoom=12] {
-      text-size: 12;
-    }
-  }
-  [zoom<12] {
-    text-min-distance: 10;
-  }
-  [zoom>=13] {
-    text-size: 11;
-    [type='town'] {
-      text-size: 13;
-    }
-  }
+  text-placement-type: simple;
+  text-placements: "N,S,E,W,NE,SE,NW,SW";
+  text-dy: 3;
+  text-dx: 3;
+  text-avoid-edges: true;
+  text-min-padding: 3;
+  text-min-distance: 10;
+  text-align: center;
+  [zoom=11] {text-size: 11;}
+  [zoom=12] {text-size: 12;}
+  [zoom=13] {text-size: 14;}
+  [zoom>=14] {text-size: 15;}
 }

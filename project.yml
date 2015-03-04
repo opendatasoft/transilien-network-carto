@@ -1,11 +1,11 @@
 scale: 1
-metatile: 4
+metatile: 6
 name: "Transilien Network"
 bounds:
-  - 1.39526
-  - 47.9873
-  - 3.59253
-  - 49.29
+  - 0.2636
+  - 47.606
+  - 4.878
+  - 49.8026
 center:
   - 2.5722
   - 48.8028
